@@ -21,20 +21,16 @@ public class BinaryGap
 
         for (int i = 0; i < bits.Length; i++)
         {
-            if (ones && bits[i] == '0')
-            {
-                gapLength++;
-            }
-            if (bits[i] == '1')
-            {
-                ones = true;
-            }
-            if (ones && bits[i] == '1')
+            if (bits[i] == '1') ones = true;
+
+            if (ones && bits[i] == '0') gapLength++;
+            else if (ones && bits[i] == '1')
             {
                 if (maxGapLength < gapLength)
                     maxGapLength = gapLength; gapLength = 0;
             }
         }
+
         outputProvider($"Max Gap Length: {maxGapLength}");
     }
 }
