@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace codility;
 
 public class BinaryGap
@@ -33,4 +35,17 @@ public class BinaryGap
 
         outputProvider($"Max Gap Length: {maxGapLength}");
     }
+
+    public static int ComputeLargestBinaryGap(int value)
+    {
+        var binaryGap = new Regex("(?<=1)(0+)(?=1)");
+        var binaryString = Convert.ToString(value, 2);
+        return
+            binaryGap.Matches(binaryString)
+                .Cast<Match>()
+                .Select(m => m.Length)
+                .DefaultIfEmpty(0)
+                .Max();
+    }
 }
+
